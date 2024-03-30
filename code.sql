@@ -2,20 +2,20 @@
 -- для кожного поля запису з таблиці order_details.
 -- Це має бути зроблено за допомогою вкладеного запиту в операторі SELECT.
 SELECT
-	*,
+    *,
     (SELECT customer_id FROM orders WHERE id = od.order_id) AS customer_id
 FROM
-	order_details od;
+    order_details od;
 
 -- 2. Напишіть SQL запит, який буде відображати таблицю order_details. Відфільтруйте результати так, щоб відповідний запис
 -- із таблиці orders виконував умову shipper_id=3.
 -- Це має бути зроблено за допомогою вкладеного запиту в операторі WHERE.
 SELECT
-	*
+    *
 FROM
-	order_details
+    order_details
 WHERE
-	order_id IN (SELECT id FROM orders WHERE shipper_id = 3);
+    order_id IN (SELECT id FROM orders WHERE shipper_id = 3);
     
 -- 3. Напишіть SQL запит, вкладений в операторі FROM, який буде обирати рядки з умовою quantity>10 з таблиці order_details.
 -- Для отриманих даних знайдіть середнє значення поля quantity — групувати слід за order_id.
@@ -57,14 +57,14 @@ RETURNS FLOAT
 DETERMINISTIC
 BEGIN
     DECLARE result FLOAT;
-	SET result = dividend / divisor;
+    SET result = dividend / divisor;
     RETURN result;
 END //
 
 DELIMITER ;
 
-SELECT 
-	*,
+SELECT
+    *,
     DivideFloats(quantity, 2.0) AS divided_quantity
-FROM 
-	order_details;
+FROM
+    order_details;
